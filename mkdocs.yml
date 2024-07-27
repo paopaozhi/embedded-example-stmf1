@@ -1,0 +1,131 @@
+site_name: FreeRTOS由浅入深
+# site_author: IOT
+site_description: FreeRTOS由浅入深
+repo_name: freertos-intensive-read
+repo_url: https://github.com/paopaozhi/freertos-intensive-read
+
+# Copyright
+copyright: Copyright &copy; 2023 paopaozhi
+
+nav:
+  - "基础外设":
+      - base_index.md
+      - "GPIO": "base_gpio.md"
+      - "USB🚧": "base_usb.md"
+  - "设备外设":
+      - "数码管": "device_smg.md"
+  - "FreeRTOS":
+      - "移植FreeRTOS": "migrationRTOS.md"
+      - "队列": "rtos_queue.md"
+  - "杂项":
+      - "链接文件": "chore_translation_ld.md"
+
+theme:
+  name: material
+  custom_dir: Docs/
+  docs_dir: Docs/
+  language: zh
+  features:
+    # - announce.dismiss        # 通知关闭
+    # - content.action.edit # 编辑操作
+    # - content.action.view # 查看操作
+    - content.code.annotate # 代码注释
+    - content.code.copy # 复制代码
+    - content.tabs.link # 标签链接
+    - content.tooltips # 工具提示
+    # - header.autohide         # 自动隐藏头部
+    - navigation.expand # 展开导航
+    - navigation.indexes # 导航索引
+    - navigation.instant # 即时导航
+    # - navigation.prune        # 导航修剪
+    # - navigation.sections     # 导航节
+    # - navigation.tabs         # 导航标签
+    # - navigation.tabs.sticky  # 固定导航标签
+    - navigation.top # 导航顶部
+    - navigation.footer # 导航底部
+    - navigation.tracking # 导航跟踪
+    - search.highlight # 搜索高亮
+    # - search.share # 搜索分享
+    # - search.suggest # 搜索建议
+    - toc.follow # 目录跟随
+    # - toc.integrate           # 目录整合
+  palette:
+    - scheme: default
+      primary: white
+      # accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - scheme: slate
+      primary: grey
+      # accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  font:
+    text: Noto Sans SC
+    code: Fira Code
+  favicon: assets/images/favicon.png
+  logo: assets/images/logo.png
+  icon:
+    logo: logo
+    repo: fontawesome/brands/github
+    edit: material/file-edit-outline
+
+extra:
+  disqus: "open"
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/paopaozhi/freertos-intensive-read
+    # - icon: fontawesome/brands/bilibili
+    #   link: https://space.bilibili.com/375609633
+  generator: false
+
+plugins:
+  - search
+  - section-index
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  # - pymdownx.emoji:
+  #     emoji_index: !!python/name:materialx.emoji.twemoji
+  #     emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.keys
+  # - pymdownx.magiclink:
+  #     repo_url_shorthand: true
+  #     user: squidfunk
+  #     repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - assets/css/mycss.css
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+
+
+

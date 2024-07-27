@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cmake",
+			"label": "build",
+			"command": "build",
+			"targets": [
+				"all"
+			],
+			"preset": "${command:cmake.activeBuildPresetName}",
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "CMake 模板 生成 任务"
+		},
+		{
+			"label": "flash firmware",
+			"type": "shell",
+			"group": "build",
+			"command": "openocd",
+			"args": [
+				"-f",
+				"${workspaceFolder}\\openocd.cfg",
+				"-c \"program ./build/Debug/Image.elf preverify verify reset exit\""
+			],
+			"dependsOn": [
+				"build"
+			],
+		}
+	]
+}

@@ -1,3 +1,11 @@
 {
-    "prettier.tabWidth": 4
+    "prettier.tabWidth": 4,
+    "files.associations": {
+        "*.gni": "gn",
+        "*.build": "json",
+        "led_smg.h": "c",
+        "board.h": "c",
+        "cjson.h": "c",
+        "limits": "c"
+    }
 }

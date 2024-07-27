@@ -99,7 +99,7 @@ void usart_task(void *argument)
         pUart->state = 0;
         pUart->buf_len = 0;
         memset(pUart->buf, 0, 128);
-        UartId = 0xff;
+        // UartId = 0xff;
         pUart = NULL;
     }
 }

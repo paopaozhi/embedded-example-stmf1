@@ -34,6 +34,8 @@ add_executable(${CMAKE_PROJECT_NAME})
 
 add_subdirectory(device/board/alientek)
 
+add_subdirectory(third_party/cJson)
+
 add_subdirectory(drivers/led_smg)
 add_subdirectory(app)
 
@@ -58,4 +60,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     nano_f103
     app
     led_smg
+    cjson
 )

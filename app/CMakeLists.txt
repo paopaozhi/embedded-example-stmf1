@@ -6,7 +6,7 @@ enable_language(C ASM)
 
 target_include_directories(${PROJECT_NAME} INTERFACE
     inc
-    # ${CMAKE_SOURCE_DIR}/drivers/led_smg
+    ${CMAKE_SOURCE_DIR}/third_party/cJson
 )
 
 file(GLOB_RECURSE SOURCES_APP "src/*.*")

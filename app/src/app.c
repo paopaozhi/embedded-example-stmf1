@@ -9,7 +9,7 @@ static uint8_t buf[128];
 static uint32_t len = 0;
 
 const osThreadAttr_t rtc_arrtTask = {
-    .stack_size = 256 * 4,
+    .stack_size = 512 * 4,
     .priority = osPriorityBelowNormal,
 };
 
@@ -20,8 +20,8 @@ void app(void)
     // printf("sum free:%d\r\n",xPortGetFreeHeapSize());
 
     memset(buf, 0, 128);
-    uart_async_read(uart1, buf, len);
-    printf("buf:%s\n", buf);
+    // uart_async_read(uart1, buf, len);
+    // printf("buf:%s\n", buf);
 
     osThreadNew(StartRtcTask, NULL, &rtc_arrtTask);
 

@@ -6,6 +6,13 @@
 
 typedef enum
 {
+    keyName0 = 0,
+    keyName1,
+    keyName2
+} keyNameTypedef;
+
+typedef enum
+{
     uart1 = 0,
     uart2,
     uart3,
@@ -24,6 +31,10 @@ typedef struct
 } RtcTimer_TypeDef;
 
 typedef int32_t (*RegisterAlarmCallback)(void);
+typedef void (*KeyCallback)(void);
+
+// key
+void key_init(keyNameTypedef key_id,KeyCallback call);
 
 // uart
 void uart_init(UartId_TypeDef uart);

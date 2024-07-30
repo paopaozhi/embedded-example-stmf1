@@ -51,6 +51,7 @@ target_sources(${CMAKE_PROJECT_NAME} INTERFACE
     src/uart.c
     src/board.c
     src/rtc.c
+    src/key.c
 )
 
 # Add include paths

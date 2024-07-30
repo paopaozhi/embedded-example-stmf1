@@ -2,6 +2,12 @@
 #include "cmsis_os2.h"
 #include "main.h"
 
+const osThreadAttr_t keyTask_attr = {
+    .name = "keyTask",
+    .stack_size = 256 * 4,
+    .priority = (osPriority_t)osPriorityNormal2,
+};
+
 const osThreadAttr_t ledSmgTask_attr = {
     .name = "ledSmgTask",
     .stack_size = 128 * 4,
@@ -14,6 +20,7 @@ const osThreadAttr_t uartTask_attr = {
     .priority = (osPriority_t)osPriorityNormal,
 };
 
+extern void StartKeyTask(void *argument);
 extern void StartLedSmgTask(void *argument);
 extern void usart_task(void *argument);
 extern void prvUart_Init(void);
@@ -29,6 +36,10 @@ void board_init(void)
     prvUart_Init();
 
     // Thread New
+    if (osThreadNew(StartKeyTask, NULL, &keyTask_attr) == NULL)
+    {
+        Error_Handler();
+    }
     if (osThreadNew(StartLedSmgTask, NULL, &ledSmgTask_attr) == NULL)
     {
         Error_Handler();

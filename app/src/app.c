@@ -17,8 +17,6 @@ extern void StartRtcTask(void *arg);
 
 void app(void)
 {
-    // printf("sum free:%d\r\n",xPortGetFreeHeapSize());
-
     memset(buf, 0, 128);
     // uart_async_read(uart1, buf, len);
     // printf("buf:%s\n", buf);
@@ -28,6 +26,7 @@ void app(void)
     while (1)
     {
         HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
-        osDelay(500);
+        printf("free heap:%d\r\n",xPortGetFreeHeapSize());
+        osDelay(1000);
     }
 }

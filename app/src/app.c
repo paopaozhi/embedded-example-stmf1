@@ -9,7 +9,7 @@ static uint8_t buf[128];
 static uint32_t len = 0;
 
 const osThreadAttr_t rtc_arrtTask = {
-    .stack_size = 512 * 4,
+    .stack_size = 150 * 4,
     .priority = osPriorityBelowNormal,
 };
 

@@ -4,7 +4,7 @@
 
 const osThreadAttr_t keyTask_attr = {
     .name = "keyTask",
-    .stack_size = 256 * 4,
+    .stack_size = 128 * 4,
     .priority = (osPriority_t)osPriorityNormal2,
 };
 
@@ -16,14 +16,15 @@ const osThreadAttr_t ledSmgTask_attr = {
 
 const osThreadAttr_t uartTask_attr = {
     .name = "uartTask",
-    .stack_size = 256 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+    .stack_size = 150 * 4,
+    .priority = (osPriority_t)osPriorityNormal7,
 };
 
 extern void StartKeyTask(void *argument);
 extern void StartLedSmgTask(void *argument);
 extern void usart_task(void *argument);
 extern void prvUart_Init(void);
+extern void prvKey_init(void);
 
 /**
  * @brief 扳级初始化
@@ -35,16 +36,19 @@ void board_init(void)
     // board
     prvUart_Init();
 
+    prvKey_init();
+
     // Thread New
+    if (osThreadNew(usart_task, NULL, &uartTask_attr) == NULL)
+    {
+        Error_Handler();
+    }
+
     if (osThreadNew(StartKeyTask, NULL, &keyTask_attr) == NULL)
     {
         Error_Handler();
     }
     if (osThreadNew(StartLedSmgTask, NULL, &ledSmgTask_attr) == NULL)
-    {
-        Error_Handler();
-    }
-    if (osThreadNew(usart_task, NULL, &uartTask_attr) == NULL)
     {
         Error_Handler();
     }

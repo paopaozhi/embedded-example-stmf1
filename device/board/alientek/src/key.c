@@ -34,7 +34,7 @@ static osMessageQueueId_t keyQueueHandle;
 
 const osThreadAttr_t KeyCallTask_Attr = {
     .name = "keycall",
-    .stack_size = 256 * 4,
+    .stack_size = 128 * 4,
     .priority = osPriorityNormal2};
 
 keyTypedef KeyList[3] = {
@@ -57,18 +57,6 @@ void StartKeyCallTask(void *argument);
 
 void StartKeyTask(void *argument)
 {
-    keyQueueHandle = osMessageQueueNew(10, sizeof(uint32_t), NULL);
-    if (keyQueueHandle == NULL)
-    {
-        board_error_handle();
-    }
-
-    keyCallHandle = osThreadNew(StartKeyCallTask, NULL, &KeyCallTask_Attr);
-    if (keyCallHandle == NULL)
-    {
-        board_error_handle();
-    }
-
     for (;;)
     {
         key_readState(&KeyList[keyName0]);
@@ -94,6 +82,21 @@ void StartKeyCallTask(void *argument)
 void key_init(keyNameTypedef key_id, KeyCallback call)
 {
     KeyList[key_id].call = call;
+}
+
+void prvKey_init(void)
+{
+    keyQueueHandle = osMessageQueueNew(10, sizeof(uint32_t), NULL);
+    if (keyQueueHandle == NULL)
+    {
+        board_error_handle();
+    }
+
+    keyCallHandle = osThreadNew(StartKeyCallTask, NULL, &KeyCallTask_Attr);
+    if (keyCallHandle == NULL)
+    {
+        board_error_handle();
+    }
 }
 
 static void key_readState(keyTypedef *key)

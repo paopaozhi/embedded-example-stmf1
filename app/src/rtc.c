@@ -12,7 +12,7 @@ typedef enum
 } PackStatus;
 
 const osThreadAttr_t RtcReceive_Attr = {
-    .stack_size = 512 * 4,
+    .stack_size = 150 * 4,
     .priority = osPriorityNormal1,
 };
 
@@ -27,7 +27,11 @@ static void StartRtcReceiveTask(void *arg);
 
 void StartRtcTask(void *arg)
 {
-    osThreadNew(StartRtcReceiveTask,NULL,&RtcReceive_Attr);
+    if(osThreadNew(StartRtcReceiveTask,NULL,&RtcReceive_Attr) == NULL)
+    {
+        printf("init rtc error!\n");
+        osThreadExit();
+    }
     while (1)
     {
         rtc_async_read(&Timer);

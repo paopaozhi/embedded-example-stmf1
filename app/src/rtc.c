@@ -16,6 +16,9 @@ const osThreadAttr_t RtcReceive_Attr = {
     .priority = osPriorityNormal1,
 };
 
+// 0: show timer 1: show date
+static uint8_t isShowMode = 0;
+
 static uint8_t Rtc_Buf[10];
 static uint8_t RtcReceiveBuf[128];
 
@@ -24,19 +27,29 @@ static RtcTimer_TypeDef Timer;
 static void unpack(char *str, RtcTimer_TypeDef *timer);
 
 static void StartRtcReceiveTask(void *arg);
+static void Key1_CallBack(void);
 
 void StartRtcTask(void *arg)
 {
-    if(osThreadNew(StartRtcReceiveTask,NULL,&RtcReceive_Attr) == NULL)
+    if (osThreadNew(StartRtcReceiveTask, NULL, &RtcReceive_Attr) == NULL)
     {
         printf("init rtc error!\n");
         osThreadExit();
     }
+    key_init(keyName0, Key1_CallBack);
     while (1)
     {
         rtc_async_read(&Timer);
         memset(Rtc_Buf, 0, sizeof(Rtc_Buf));
-        sprintf((char *)Rtc_Buf, "%02d-%02d-%02d", Timer.hour, Timer.min, Timer.second);
+
+        if (isShowMode == 0)
+        {
+            sprintf((char *)Rtc_Buf, "%02d-%02d-%02d", Timer.hour, Timer.min, Timer.second);
+        }
+        else
+        {
+            sprintf((char *)Rtc_Buf, "20%02d%02d%02d", Timer.year, Timer.month, Timer.day);
+        }
         LED_Str(Rtc_Buf);
         osDelay(1000);
     }
@@ -48,12 +61,17 @@ static void StartRtcReceiveTask(void *arg)
     RtcTimer_TypeDef timer;
     while (1)
     {
-        memset(RtcReceiveBuf,0,sizeof(RtcReceiveBuf));
-        uart_async_read(uart1,RtcReceiveBuf,len);
-        printf("rtc_json: %s\n",RtcReceiveBuf);
-        unpack(RtcReceiveBuf,&timer);
+        memset(RtcReceiveBuf, 0, sizeof(RtcReceiveBuf));
+        uart_async_read(uart1, RtcReceiveBuf, len);
+        printf("rtc_json: %s\n", RtcReceiveBuf);
+        unpack(RtcReceiveBuf, &timer);
         rtc_async_write(&timer);
     }
+}
+
+static void Key1_CallBack(void)
+{
+    isShowMode = !isShowMode;
 }
 
 static void unpack(char *str, RtcTimer_TypeDef *timer)

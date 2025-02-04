@@ -7,10 +7,11 @@
         {
             "name": "Cortex Debug",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/Debug/Image.elf",
+            "executable": "${command:cmake.launchTargetPath}",
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
+            "device": "STM32F103C8",
             "servertype": "openocd",
             "configFiles": [
                 "${workspaceFolder}/openocd.cfg"

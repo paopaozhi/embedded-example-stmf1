@@ -6,8 +6,9 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/out/${presetName}",
-		    "toolchainFile": "${sourceDir}/cmake/gcc-arm-none-eabi.cmake",
+		    "toolchainFile": ".empm/cmake/toolchain/gcc-arm-none-eabi.cmake",
             "cacheVariables": {
+                "CMAKE_PROJECT_NAME": "Image"
             }
         },
         {

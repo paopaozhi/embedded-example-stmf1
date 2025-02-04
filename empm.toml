@@ -1,0 +1,14 @@
+[info]
+name = "stm32f103-demo"
+version = "0.1.0"
+board = "bluepill"
+board_url = "https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill"
+device = "stm32f103c8t6"
+sdk = true
+
+[dependencies]
+lvgl = {url = "https://github.com/lvgl/lvgl", version = "v9.1.0"}
+
+[docs]
+type = "mkdocs"
+config = "default"

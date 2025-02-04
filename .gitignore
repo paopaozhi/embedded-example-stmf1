@@ -6,3 +6,6 @@ site
 
 # vscode
 out
+
+# empm
+.empm/

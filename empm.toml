@@ -9,6 +9,10 @@ sdk = true
 [dependencies]
 lvgl = {url = "https://github.com/lvgl/lvgl", version = "v9.1.0"}
 
+[dependencies.driver]
+norflash = {version = "0.1.0"}
+ledsmg = {version = "0.3.0",features = "atk"}
+
 [docs]
 type = "mkdocs"
 config = "default"
